@@ -119,14 +119,24 @@ private:
 
         for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
             if (vkCreateSemaphore(device, &semaphoreInfo, nullptr, &imageAvailableSemaphores[i]) != VK_SUCCESS ||
-                vkCreateSemaphore(device, &semaphoreInfo, nullptr, &renderFinishedSemaphores[i]) != VK_SUCCESS ||
                 vkCreateFence(device, &fenceInfo, nullptr, &inFlightFences[i]) != VK_SUCCESS)
             {
                 throw std::runtime_error("failed to create synchronization objects for a frame!");
             }
             else
             {
-                std::cout << "Vulkan created synchronization objects for a frame! successfully! " << (i + 1) << std::endl;
+                std::cout << "Vulkan created synchronization objects for a frame successfully! " << (i + 1) << std::endl;
+            }
+        }
+
+        for (size_t i = 0; i < swapChainImages.size(); i++) {
+            if (vkCreateSemaphore(device, &semaphoreInfo, nullptr, &renderFinishedSemaphores[i]) != VK_SUCCESS)
+            {
+                throw std::runtime_error("failed to create semaphore for a for a swap chain image!");
+            }
+            else
+            {
+                std::cout << "Vulkan created semaphores for a swap chain image successfully! " << (i + 1) << std::endl;
             }
         }
     }
