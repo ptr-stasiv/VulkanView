@@ -43,7 +43,7 @@ add_executable(VulkanView
     ${SOURCE_FILES}
 )
 
-add_custom_target(VulkanShaders ALL DEPENDS ${COMPILED_SHADERS})
+add_custom_target(VulkanShaders ALL DEPENDS ${COMPILED_SHADERS} SOURCES ${SHADER_SOURCES})
 add_dependencies(VulkanView VulkanShaders)
 
 set_target_properties(VulkanView PROPERTIES
