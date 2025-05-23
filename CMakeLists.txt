@@ -3,7 +3,14 @@ cmake_minimum_required(VERSION 3.22)
 project(VulkanView)
 
 set(SOURCE_FILES
-	src/main.cpp
+	src/engine/Main.cpp
+	src/engine/Engine.cpp
+    src/vulkan/VulkanApp.cpp
+)
+
+set(HEADER_FILES
+    headers/engine/Engine.h
+    headers/vulkan/VulkanApp.h
 )
 
 set(SHADER_SOURCES
@@ -41,9 +48,21 @@ endforeach()
 
 add_executable(VulkanView
     ${SOURCE_FILES}
+    ${HEADER_FILES}
 )
 
-add_custom_target(VulkanShaders ALL DEPENDS ${COMPILED_SHADERS} SOURCES ${SHADER_SOURCES})
+source_group(TREE ${CMAKE_SOURCE_DIR}/src PREFIX "src" FILES
+    ${SOURCE_FILES}
+)
+
+source_group(TREE ${CMAKE_SOURCE_DIR}/headers PREFIX "headers" FILES
+    ${HEADER_FILES}
+)
+
+target_include_directories(VulkanView PRIVATE "${CMAKE_SOURCE_DIR}/headers/")
+
+
+add_custom_target(VulkanShaders ALL DEPENDS ${COMPILED_SHADERS} SOURCES ${SHADER_SOURCES} "src/engine/Engine.cpp" "src/vulkan/VulkanApp.cpp" "headers/vulkan/VulkanApp.h")
 add_dependencies(VulkanView VulkanShaders)
 
 set_target_properties(VulkanView PROPERTIES
