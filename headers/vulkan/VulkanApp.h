@@ -104,6 +104,10 @@ private:
 
     void createSwapChain();
 
+    void cleanupSwapChain();
+
+    void recreateSwapChain();
+
     void createSuface();
 
     void createLogicalDevice();
