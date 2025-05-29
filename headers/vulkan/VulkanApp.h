@@ -179,4 +179,8 @@ private:
     std::vector<VkFence> inFlightFences;
 
     uint32_t currentFrame = 0;
+
+    bool framebufferResized = false;
+
+    friend void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 };
