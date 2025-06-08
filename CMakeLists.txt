@@ -6,11 +6,13 @@ set(SOURCE_FILES
 	src/engine/Main.cpp
 	src/engine/Engine.cpp
     src/vulkan/VulkanApp.cpp
+    src/vulkan/Shader.cpp
 )
 
 set(HEADER_FILES
     headers/engine/Engine.h
     headers/vulkan/VulkanApp.h
+    headers/vulkan/Shader.h
 )
 
 set(SHADER_SOURCES

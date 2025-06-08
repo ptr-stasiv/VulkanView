@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <vector>
+#include <vulkan/vulkan.h>
 
 class VulkanApp;
 
@@ -16,7 +18,14 @@ public:
 
 	void shutdown();
 
-private:
+	void onFrameRun(VkCommandBuffer commandBuffer);
+
+	void createGraphicsPipeline();
 	
+	VkShaderModule createShaderModule(const std::vector<char>& code);
+
 	std::unique_ptr<VulkanApp> vulkanApp;
+
+	VkPipelineLayout pipelineLayout;
+	VkPipeline graphicsPipeline;
 };

@@ -11,6 +11,7 @@
 #include <optional>
 #include <set>
 #include <algorithm>
+#include <functional>
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -78,6 +79,8 @@ public:
 
     void shutdown();
 
+    std::function<void(VkCommandBuffer)> onFrameRun;
+
 private:
 
     void initWindow();
@@ -93,10 +96,6 @@ private:
     void createCommandPool();
 
     void createFramebuffers();
-
-    void createGraphicsPipeline();
-
-    VkShaderModule createShaderModule(const std::vector<char>& code);
 
     void createRenderPass();
 
@@ -136,7 +135,7 @@ private:
 
     void cleanup();
 
-private:
+public:
 
     GLFWwindow* window;
 
@@ -163,10 +162,6 @@ private:
     std::vector<VkImageView> swapChainImageViews;
 
     VkRenderPass renderPass;
-
-    VkPipelineLayout pipelineLayout;
-
-    VkPipeline graphicsPipeline;
 
     std::vector<VkFramebuffer> swapChainFramebuffers;
 
