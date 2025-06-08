@@ -5,10 +5,27 @@ class Shader
 {
 public:
 
-	Shader(VulkanApp* app);
+	void initializeStages(const std::shared_ptr<VulkanApp>& app);
+
+	void cleanup();
+
+	void addStage(const std::string& shaderPath, const VkShaderStageFlagBits type);
+
+	void createGraphicsPipeline();
+
+	VkPipeline getGraphicsPipeline() const 
+	{
+		return graphicsPipeline; 
+	}
 
 private:
 
-	VulkanApp* vulkanApp;
+	VkShaderModule createShaderModule(const std::vector<char>& code);
 
+	VkPipeline graphicsPipeline;
+	VkPipelineLayout graphicsPipelineLayout;
+
+	std::shared_ptr<VulkanApp> vulkanApp;
+
+	std::vector<VkPipelineShaderStageCreateInfo> shaderStages;
 };
