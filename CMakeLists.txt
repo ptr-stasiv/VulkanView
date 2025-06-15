@@ -7,12 +7,14 @@ set(SOURCE_FILES
 	src/engine/Engine.cpp
     src/vulkan/VulkanApp.cpp
     src/vulkan/Shader.cpp
+    src/vulkan/VertexBuffer.cpp
 )
 
 set(HEADER_FILES
     headers/engine/Engine.h
     headers/vulkan/VulkanApp.h
     headers/vulkan/Shader.h
+    headers/vulkan/VertexBuffer.h
 )
 
 set(SHADER_SOURCES

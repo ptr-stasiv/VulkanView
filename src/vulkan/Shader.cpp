@@ -56,10 +56,10 @@ void Shader::createGraphicsPipeline()
 {
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertexInputInfo.vertexBindingDescriptionCount = 0;
-    vertexInputInfo.pVertexBindingDescriptions = nullptr; // Optional
-    vertexInputInfo.vertexAttributeDescriptionCount = 0;
-    vertexInputInfo.pVertexAttributeDescriptions = nullptr; // Optional
+    vertexInputInfo.vertexBindingDescriptionCount = vertexBufferDescriptions.size();
+    vertexInputInfo.pVertexBindingDescriptions = vertexBufferDescriptions.data(); // Optional
+    vertexInputInfo.vertexAttributeDescriptionCount = vertexBufferInputDescriptions.size();
+    vertexInputInfo.pVertexAttributeDescriptions = vertexBufferInputDescriptions.data(); // Optional
 
     VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
     inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -178,6 +178,11 @@ void Shader::createGraphicsPipeline()
     {
         std::cout << "Vulkan graphics pipeline created successfully! " << std::endl;
     }
+}
+
+void Shader::bindGraphicsPipeline(VkCommandBuffer commandBuffer) const
+{
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
 }
 
 VkShaderModule Shader::createShaderModule(const std::vector<char>& code)
